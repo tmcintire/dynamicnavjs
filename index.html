@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+
+<style>
+
+#navbar li {
+    display: inline-block;
+    margin: 20px;
+}    
+
+</style>
+    
+</head>
+
+<body>
+    <!--Navbar-->
+	<nav id="navbar"></nav>
+    
+    <!--Form to add navbar menus-->
+    <form>
+        <input type="text" id="pageaddr" placeholder="page address">
+        <input type="text" id="pagetitle" placeholder="page title">
+        <button type="submit" name="Submit" id="submit">Submit</button>
+    </form>
+    
+    <!--Displays what user inputs after button click-->
+    <p>Address Input: <span id="input1"></span></p>
+    <p>Title Input: <span id="input2"></span></p>
+</body>
+    
+<!--jQuery include -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>    
+<script>
+    
+    //Set value for page array which will get input from the form 
+    var pages = [];
+    
+    //Set navbar array to be dynamically updated and added to the template
+    var nav = [];
+    
+    // js counter to change array number
+    var i = 0;
+    
+    //function that executed on button click
+    $('#submit').click(function() {
+        //Get value from the form inputs
+        var address = document.getElementById("pageaddr").value;
+        var title = document.getElementById("pagetitle").value;
+        
+        //push the form inputs to the pages array
+        pages.push([address, title]);
+        
+        //displays the users input inside the template
+        document.getElementById('input1').innerHTML = address;
+        document.getElementById('input2').innerHTML = title;
+        
+        //pushes the full html to be added to the navbar line
+        nav.push(["<li><a href=" + address + ">" + title + "</a></li>"]);
+        
+        //appends the new array to the navbar
+        $('#navbar').append(nav[i]);
+        
+        //Increase the count by one to access the next array
+        i++;
+        
+        //Keep the form from refreshing the page
+        return false;
+    });
+    
+</script>
+</html>
